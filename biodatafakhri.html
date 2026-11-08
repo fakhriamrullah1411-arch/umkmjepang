@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chef Fakhri - Owner & Head Chef Oishii Ramen</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Bio & Portfolio - Chef Fakhri | Owner Oishii Ramen</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font (Inter & Plus Jakarta Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -14,384 +19,448 @@
                     colors: {
                         ramen: {
                             red: '#E53E3E',
-                            gold: '#DD6B20',
-                            dark: '#121214',
-                            card: '#1A1D24',
-                            border: '#2D3748'
+                            darkRed: '#9B2C2C',
+                            gold: '#D69E2E',
+                            dark: '#0F1115',
+                            cardBg: '#171923',
+                            cardBorder: '#2D3748'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        jp: ['Noto Serif JP', 'serif']
                     }
                 }
             }
         }
     </script>
-    <!-- FontAwesome & Lucide Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
-    
+
     <style>
-        body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-            transition: background-color 0.3s, color 0.3s;
+        /* Custom Scrollbar for Horizontal Categories */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        .glow-red {
-            box-shadow: 0 0 25px -5px rgba(229, 62, 62, 0.4);
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        .glow-card:hover {
-            box-shadow: 0 8px 30px rgba(229, 62, 62, 0.15);
-            transform: translateY(-2px);
+
+        /* Glassmorphism Effects */
+        .glass-card {
+            background: rgba(23, 25, 35, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
+
+        .glass-nav {
+            background: rgba(15, 17, 21, 0.9);
+            backdrop-filter: blur(16px);
+        }
+
+        /* Active Category Style with Glowing Effect */
+        .cat-btn-active {
+            background: linear-gradient(135deg, #E53E3E 0%, #9B2C2C 100%);
+            color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cat-btn-inactive {
+            background: rgba(30, 34, 45, 0.7);
+            color: #A0AEC0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cat-btn-inactive:hover {
+            background: rgba(45, 55, 72, 0.8);
+            color: #FFFFFF;
+            border-color: rgba(229, 62, 62, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Animations */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .glow-effect {
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+
         /* Theme Overrides */
-        .theme-warm {
-            background-color: #1a1614 !important;
-            color: #f7fafc !important;
+        body.theme-warm {
+            background-color: #1A1816 !important;
+            color: #F7FAFC;
         }
-        .theme-warm .bg-card-custom {
-            background-color: #26201c !important;
-            border-color: #3d322b !important;
+        body.theme-warm .glass-card {
+            background: rgba(40, 32, 28, 0.85);
+            border-color: rgba(214, 158, 46, 0.2);
         }
-        .theme-cyber {
-            background-color: #0b0c10 !important;
-            color: #66fcf1 !important;
+        body.theme-cyber {
+            background-color: #0B0E14 !important;
+            color: #E2E8F0;
         }
-        .theme-cyber .bg-card-custom {
-            background-color: #1f2833 !important;
-            border-color: #45a29e !important;
+        body.theme-cyber .glass-card {
+            background: rgba(18, 24, 38, 0.85);
+            border-color: rgba(66, 153, 225, 0.2);
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen py-8 px-4 sm:px-6 transition-all duration-300">
+<body class="dark bg-[#0F1115] text-gray-100 min-h-screen font-sans pb-16 antialiased selection:bg-red-600 selection:text-white">
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 bg-red-600 text-white px-5 py-2.5 rounded-full shadow-2xl z-50 text-sm font-semibold opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2">
-        <i class="fa-solid fa-check-circle"></i>
-        <span id="toast-msg">Teks berhasil disalin!</span>
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-red-600 text-white px-5 py-2.5 rounded-full shadow-2xl text-sm font-semibold opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-text">Tautan berhasil disalin!</span>
     </div>
 
-    <!-- Main Container -->
-    <div class="max-w-md mx-auto space-y-6">
+    <!-- Main Container Container (Centered Max Width like Bio Link) -->
+    <div class="max-w-md md:max-w-xl mx-auto px-4 py-4 space-y-5">
+        
+        <!-- Top Navigation Bar: Back & Share Button -->
+        <header class="glass-nav rounded-2xl p-2.5 px-4 flex items-center justify-between border border-white/10 sticky top-3 z-40 shadow-xl">
+            <!-- Left: Back Button to Index -->
+            <a href="homeramen.html" class="flex items-center gap-2 text-xs font-semibold text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-xl border border-white/5 transition-all active:scale-95">
+                <i class="fa-solid fa-chevron-left text-red-500"></i>
+                <span>Home</span>
+            </a>
 
-        <!-- Top Navigation Controls (Theme & Lang Switcher) -->
-        <div class="flex flex-wrap items-center justify-between gap-2 p-2 bg-gray-900/80 backdrop-blur-md rounded-2xl border border-gray-800 shadow-lg">
-            <!-- Theme Buttons -->
-            <div class="flex items-center gap-1 text-xs">
-                <button onclick="setTheme('dark')" class="px-2.5 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 transition font-medium flex items-center gap-1" title="Gelap">
-                    <span>Gelap</span> 🌙
+            <!-- Right: Theme, Language & Share Button -->
+            <div class="flex items-center gap-2">
+                <!-- Share Button -->
+                <button onclick="copyCurrentLink()" title="Bagikan Bio" class="w-8 h-8 rounded-xl bg-white/5 hover:bg-red-600/20 text-gray-300 hover:text-red-400 border border-white/5 hover:border-red-500/30 flex items-center justify-center transition-all active:scale-95">
+                    <i class="fa-solid fa-share-nodes text-xs"></i>
                 </button>
-                <button onclick="setTheme('light')" class="px-2.5 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 transition font-medium flex items-center gap-1" title="Terang">
-                    <span>Terang</span> ☀️
-                </button>
-                <button onclick="setTheme('warm')" class="px-2.5 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 transition font-medium flex items-center gap-1" title="Hangat">
-                    <span>Hangat</span> 🏮
-                </button>
+                <!-- Quick Contact -->
+                <a href="https://wa.me/6281393151973" target="https://web.whatsapp.com/" title="WhatsApp Direct" class="w-8 h-8 rounded-xl bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center transition-all active:scale-95 hover:bg-emerald-600 hover:text-white">
+                    <i class="fa-brands fa-whatsapp text-xs"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Profile Header Box (Style Inspired by Oishii Ramen Header) -->
+        <div class="glass-card rounded-3xl overflow-hidden relative border border-white/10 shadow-2xl">
+            <!-- Cover Banner Gradient -->
+            <div class="h-32 bg-gradient-to-r from-red-700 via-orange-600 to-amber-600 relative">
+                <div class="absolute inset-0 bg-black/30 backdrop-blur-[2px]"></div>
+                <!-- Japanese Pattern Overlay -->
+                <div class="absolute right-3 bottom-2 text-white/10 text-5xl font-jp font-bold select-none pointer-events-none">
+                    ラーメン
+                </div>
             </div>
 
-            <!-- Language Buttons -->
-            <div class="flex items-center bg-gray-950 p-1 rounded-xl border border-gray-800 text-xs font-bold">
-                <button id="lang-id" onclick="setLanguage('id')" class="px-2.5 py-1 rounded-lg bg-red-600 text-white transition">ID</button>
-                <button id="lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-lg text-gray-400 hover:text-white transition">EN</button>
+            <!-- Profile Avatar & Info -->
+            <div class="px-5 pb-6 text-center relative">
+                <!-- Avatar with Badge -->
+                <div class="relative -mt-16 mb-3 inline-block">
+                    <div class="w-28 h-28 rounded-full p-1 bg-gradient-to-tr from-red-600 via-yellow-500 to-amber-500 shadow-xl mx-auto">
+                        <img src="Chef.jpeg" 
+                             alt="Chef Fakhri" 
+                             class="w-full h-full object-cover rounded-full border-2 border-[#0F1115]">
+                    </div>
+                    <!-- Online Status Indicator -->
+                    <span class="absolute bottom-1 right-2 w-4 h-4 bg-emerald-500 border-2 border-[#0F1115] rounded-full" title="Dapur Buka"></span>
+                </div>
+
+                <!-- Name & Title -->
+                <h1 class="text-2xl font-extrabold text-white tracking-wide flex items-center justify-center gap-2">
+                    Chef Fakhri 
+                    <i class="fa-solid fa-circle-check text-red-500 text-sm" title="Verified Chef"></i>
+                </h1>
+                <p id="sub-title" class="text-xs font-semibold text-red-400 uppercase tracking-widest mt-1">
+                    Owner & Executive Head Chef
+                </p>
+
+                <!-- Location & Badge -->
+                <div class="flex items-center justify-center gap-2 mt-2 text-xs text-gray-400">
+                    <span><i class="fa-solid fa-location-dot text-red-500 mr-1"></i> Wonosobo, Jawa Tengah</span>
+                    <span>•</span>
+                    <span class="bg-red-500/20 text-red-300 px-2 py-0.5 rounded-full border border-red-500/30 text-[10px]">100% Halal Otentik</span>
+                </div>
+
+                <!-- Bio Short Quote -->
+                <p id="bio-desc" class="text-xs text-gray-300 italic mt-3 px-2 max-w-sm mx-auto leading-relaxed">
+                    "Menghadirkan keharmonisan rasa ramen otentik Jepang dengan standar kelas atas & bahan berkualitas tinggi."
+                </p>
+
+                <!-- Store Status Pills -->
+                <div class="mt-4 flex flex-wrap items-center justify-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 text-xs font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        Kedai Buka Hari Ini (10.00 - 22.00 WIB)
+                    </span>
+                </div>
+
+                <!-- Social Icons Bar -->
+                <div class="flex items-center justify-center gap-3 mt-5">
+                    <a href="https://instagram.com" target="https://www.instagram.com/fakriyy7/" class="w-10 h-10 rounded-2xl bg-white/5 hover:bg-pink-600 text-gray-300 hover:text-white border border-white/10 flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-lg">
+                        <i class="fa-brands fa-instagram text-base"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="https://www.tiktok.com/@optimumprem1" class="w-10 h-10 rounded-2xl bg-white/5 hover:bg-black text-gray-300 hover:text-white border border-white/10 flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-lg">
+                        <i class="fa-brands fa-tiktok text-base"></i>
+                    </a>
+                    <a href="https://youtube.com" target="https://www.youtube.com/@fakriyy7" class="w-10 h-10 rounded-2xl bg-white/5 hover:bg-red-600 text-gray-300 hover:text-white border border-white/10 flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-lg">
+                        <i class="fa-brands fa-youtube text-base"></i>
+                    </a>
+                    <a href="https://wa.me/6281393151973" target="https://web.whatsapp.com/" class="w-10 h-10 rounded-2xl bg-white/5 hover:bg-emerald-600 text-gray-300 hover:text-white border border-white/10 flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                    </a>
+                    <a href="https://maps.google.com" target="https://maps.google.com" class="w-10 h-10 rounded-2xl bg-white/5 hover:bg-blue-600 text-gray-300 hover:text-white border border-white/10 flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-lg">
+                        <i class="fa-solid fa-map-location-dot text-base"></i>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Header Profile Banner Card -->
-        <div class="relative bg-gradient-to-b from-red-900/40 via-gray-900 to-gray-900 border border-gray-800 rounded-3xl p-6 text-center overflow-hidden shadow-2xl bg-card-custom">
-            <!-- Background Graphic Accent -->
-            <div class="absolute -top-12 -right-12 w-36 h-36 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-orange-600/20 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <!-- Quick Share Action Top Right -->
-            <button onclick="copyCurrentUrl()" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-gray-800/60 p-2.5 rounded-full border border-gray-700/50 backdrop-blur-sm transition">
-                <i class="fa-solid fa-share-nodes text-sm"></i>
-            </button>
-
-            <!-- Profile Avatar with Verified Badge -->
-            <div class="relative inline-block mb-3">
-                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=400" 
-                     alt="Chef Fakhri" 
-                     class="w-28 h-28 rounded-full object-cover border-4 border-red-600/80 shadow-xl mx-auto ring-4 ring-red-950">
-                <span class="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 border-2 border-gray-900 rounded-full" title="Online & Ready"></span>
-            </div>
-
-            <!-- Name & Title -->
-            <h1 class="text-2xl font-extrabold text-white tracking-tight flex items-center justify-center gap-1.5">
-                Chef Fakhri 
-                <i class="fa-solid fa-circle-check text-red-500 text-lg" title="Verified Chef"></i>
-            </h1>
-            <p class="text-xs uppercase tracking-widest text-red-400 font-bold mt-1" id="sub-title">Owner & Executive Head Chef</p>
-            <p class="text-gray-300 text-xs mt-2 max-w-xs mx-auto italic" id="bio-desc">
-                "Menghadirkan keharmonisan rasa ramen otentik Jepang dengan standar kelas atas & bahan berkualitas tinggi."
-            </p>
-
-            <!-- Location & Schedule Badge -->
-            <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
-                <span class="bg-gray-800/90 text-gray-300 px-3 py-1 rounded-full border border-gray-700/60 flex items-center gap-1.5">
-                    <i class="fa-solid fa-location-dot text-red-500"></i> Wonosobo, Jawa Tengah
-                </span>
-                <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-800/80 px-3 py-1 rounded-full font-medium flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Buka (10.00 - 22.00 WIB)
-                </span>
-            </div>
-
-            <!-- Social Media Bar -->
-            <div class="flex items-center justify-center gap-3 mt-5 pt-4 border-t border-gray-800/80">
-                <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800/80 hover:bg-red-600 hover:text-white text-gray-300 flex items-center justify-center transition border border-gray-700/50">
-                    <i class="fa-brands fa-instagram text-lg"></i>
-                </a>
-                <a href="https://tiktok.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800/80 hover:bg-red-600 hover:text-white text-gray-300 flex items-center justify-center transition border border-gray-700/50">
-                    <i class="fa-brands fa-tiktok text-lg"></i>
-                </a>
-                <a href="https://wa.me/6281234567890" target="_blank" class="w-10 h-10 rounded-full bg-gray-800/80 hover:bg-emerald-600 hover:text-white text-gray-300 flex items-center justify-center transition border border-gray-700/50">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                </a>
-                <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800/80 hover:bg-red-600 hover:text-white text-gray-300 flex items-center justify-center transition border border-gray-700/50">
-                    <i class="fa-brands fa-youtube text-lg"></i>
-                </a>
-                <a href="https://maps.google.com" target="_blank" class="w-10 h-10 rounded-full bg-gray-800/80 hover:bg-blue-600 hover:text-white text-gray-300 flex items-center justify-center transition border border-gray-700/50">
-                    <i class="fa-solid fa-map-location-dot text-lg"></i>
-                </a>
-            </div>
-        </div>
-
-        <!-- Search Bar -->
+        <!-- Search Bar (Style Arya Musthofa) -->
         <div class="relative">
             <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-            <input type="text" id="search-input" onkeyup="filterLinks()" placeholder="Cari menu, layanan, atau info..." 
-                   class="w-full bg-gray-900 border border-gray-800 rounded-2xl py-3 pl-11 pr-4 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-red-500 transition shadow-inner">
+            <input type="text" id="search-input" onkeyup="searchLinks()" 
+                   placeholder="Cari menu ramen, link sosial, atau kontak..." 
+                   class="w-full bg-[#171923]/90 border border-white/10 rounded-2xl pl-11 pr-4 py-3 text-xs text-white placeholder-gray-400 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all shadow-lg">
         </div>
 
-        <!-- Category Filter Tabs -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs font-medium">
-            <button onclick="filterCategory('all')" class="cat-btn active px-4 py-2 rounded-xl bg-red-600 text-white whitespace-nowrap shadow-md transition">Semua</button>
-            <button onclick="filterCategory('menu')" class="cat-btn px-4 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 whitespace-nowrap transition">🍜 Menu Favorit</button>
-            <button onclick="filterCategory('contact')" class="cat-btn px-4 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 whitespace-nowrap transition">📞 Kontak & Order</button>
-            <button onclick="filterCategory('about')" class="cat-btn px-4 py-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 whitespace-nowrap transition">👨‍🍳 Profil & Prestasi</button>
+        <!-- Enhanced Horizontal Scroll Filter Buttons (Gaya Tombol Ramen Otentik) -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 px-0.5">
+            <button onclick="filterCategory(this, 'all')" class="cat-btn cat-btn-active shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-utensils"></i>
+                <span>Semua Link</span>
+            </button>
+            <button onclick="filterCategory(this, 'menu')" class="cat-btn cat-btn-inactive shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-bowl-food text-red-400"></i>
+                <span>Menu Signature</span>
+            </button>
+            <button onclick="filterCategory(this, 'social')" class="cat-btn cat-btn-inactive shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-hashtag text-amber-400"></i>
+                <span>Sosial Media</span>
+            </button>
+            <button onclick="filterCategory(this, 'order')" class="cat-btn cat-btn-inactive shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-emerald-400"></i>
+                <span>Pesan Online</span>
+            </button>
+            <button onclick="filterCategory(this, 'cert')" class="cat-btn cat-btn-inactive shrink-0 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-award text-blue-400"></i>
+                <span>Sertifikasi & Karir</span>
+            </button>
         </div>
 
-        <!-- Link & Showcase List -->
+        <!-- Links Container / Card Grid -->
         <div id="links-container" class="space-y-3">
 
-            <!-- Item 1: Catalog & Order online -->
-            <a href="https://wa.me/6281234567890?text=Halo%20Chef%20Fakhri,%20saya%20mau%20pesan%20Ramen" 
-               target="_blank"
-               data-category="contact menu" 
-               class="link-card flex items-center justify-between p-4 bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-red-500/50 rounded-2xl transition duration-200 group glow-card bg-card-custom">
+            <!-- 1. Menu Best Seller - Shoyu Tori Ramen -->
+            <div class="link-card glass-card p-3.5 rounded-2xl hover:border-red-500/50 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-between group cursor-pointer" 
+                 data-category="menu" onclick="openMenuModal('Shoyu Tori Ramen Otentik', 'Rp 28.000', 'Kuah shoyu khas Tokyo dengan chashu ayam empuk, tamago setengah matang, dan nori renyah.', 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=500&q=80')">
                 <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-red-950/80 border border-red-800/60 flex items-center justify-center text-red-500 group-hover:scale-110 transition duration-200 shrink-0">
-                        <i class="fa-solid fa-utensils text-xl"></i>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=150&q=80" alt="Shoyu Ramen" class="w-12 h-12 rounded-xl object-cover border border-white/10 group-hover:scale-105 transition-transform">
                     <div>
                         <div class="flex items-center gap-2">
-                            <h3 class="font-bold text-sm text-white group-hover:text-red-400 transition">Pesan Online (WhatsApp Direct)</h3>
-                            <span class="px-2 py-0.5 text-[10px] bg-red-900/50 text-red-400 rounded-md border border-red-800/50 font-semibold">Cepat</span>
+                            <h2 class="text-sm font-bold text-white group-hover:text-red-400 transition">Shoyu Tori Ramen</h2>
+                            <span class="text-[10px] bg-red-600 text-white font-bold px-1.5 py-0.5 rounded-md">Best Seller 🔥</span>
                         </div>
-                        <p class="text-xs text-gray-400 mt-0.5">Order cepat tanpa antri, kirim via kurir / take away</p>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Kuah Shoyu Otentik Tokyo • Rp 28.000</p>
                     </div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-red-400 group-hover:translate-x-1 transition text-sm ml-2"></i>
-            </a>
+                <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-red-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </div>
+            </div>
 
-            <!-- Item 2: Signature Menu Highlight 1 -->
-            <div data-category="menu" onclick="openMenuModal('Shoyu Tori Ramen', 'Rp 28.000', 'Kuah shoyu otentik khas Tokyo disajikan dengan chashu ayam panggang, telur ajitama setengah matang, dan nori segar.', 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&q=80&w=400')" 
-                 class="link-card cursor-pointer flex items-center justify-between p-3.5 bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-orange-500/50 rounded-2xl transition duration-200 group glow-card bg-card-custom">
+            <!-- 2. Menu Pedas - Spicy Jigoku Ramen -->
+            <div class="link-card glass-card p-3.5 rounded-2xl hover:border-red-500/50 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-between group cursor-pointer" 
+                 data-category="menu" onclick="openMenuModal('Spicy Jigoku Ramen Level 1-5', 'Rp 30.000', 'Ramen kuah pedas membara racikan bumbu khas Chef Fakhri dengan topping daging cincang pedas.', 'https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=500&q=80')">
                 <div class="flex items-center gap-3.5">
-                    <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&q=80&w=400" 
-                         alt="Shoyu Tori Ramen" 
-                         class="w-12 h-12 rounded-xl object-cover shrink-0 border border-gray-700">
+                    <img src="https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=150&q=80" alt="Jigoku Ramen" class="w-12 h-12 rounded-xl object-cover border border-white/10 group-hover:scale-105 transition-transform">
                     <div>
                         <div class="flex items-center gap-2">
-                            <h3 class="font-bold text-sm text-white group-hover:text-orange-400 transition">Shoyu Tori Ramen</h3>
-                            <span class="px-1.5 py-0.5 text-[10px] bg-orange-950 text-orange-400 rounded border border-orange-800 font-bold">Best Seller 🔥</span>
+                            <h2 class="text-sm font-bold text-white group-hover:text-red-400 transition">Spicy Jigoku Ramen</h2>
+                            <span class="text-[10px] bg-amber-500 text-black font-bold px-1.5 py-0.5 rounded-md">Pedas Mantap 🌶️</span>
                         </div>
-                        <p class="text-xs text-gray-400 mt-0.5">Rp 28.000 • Kuah Shoyu Otentik</p>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Tingkat Pedas Bebas Pilih • Rp 30.000</p>
                     </div>
                 </div>
-                <button class="text-xs px-3 py-1.5 bg-gray-800 group-hover:bg-orange-600 text-gray-200 group-hover:text-white rounded-xl transition font-medium">Lihat</button>
+                <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-red-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </div>
             </div>
 
-            <!-- Item 3: Signature Menu Highlight 2 -->
-            <div data-category="menu" onclick="openMenuModal('Spicy Jigoku Ramen', 'Rp 30.000', 'Ramen kuah pedas membara dengan pilihan level 1-5, dilengkapi topping katsu renyah dan kuah kaldu pekat.', 'https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&q=80&w=400')" 
-                 class="link-card cursor-pointer flex items-center justify-between p-3.5 bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-red-500/50 rounded-2xl transition duration-200 group glow-card bg-card-custom">
+            <!-- 3. GoFood / GrabFood Order -->
+            <a href="https://gofood.co.id" target="_blank" class="link-card glass-card p-3.5 rounded-2xl hover:border-emerald-500/50 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-between group" data-category="order">
                 <div class="flex items-center gap-3.5">
-                    <img src="https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&q=80&w=400" 
-                         alt="Spicy Jigoku Ramen" 
-                         class="w-12 h-12 rounded-xl object-cover shrink-0 border border-gray-700">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-motorcycle text-lg"></i>
+                    </div>
                     <div>
-                        <div class="flex items-center gap-2">
-                            <h3 class="font-bold text-sm text-white group-hover:text-red-400 transition">Spicy Jigoku Ramen</h3>
-                            <span class="px-1.5 py-0.5 text-[10px] bg-red-950 text-red-400 rounded border border-red-800 font-bold">Pedas Mantap 🌶️</span>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-0.5">Rp 30.000 • Level Pedas 1-5</p>
+                        <h2 class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Pesan via GoFood / GrabFood</h2>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Diskon promo & gratis ongkir tersedia</p>
                     </div>
                 </div>
-                <button class="text-xs px-3 py-1.5 bg-gray-800 group-hover:bg-red-600 text-gray-200 group-hover:text-white rounded-xl transition font-medium">Lihat</button>
+                <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-emerald-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </div>
+            </a>
+
+            <!-- 4. Resep & Konten TikTok Chef Fakhri -->
+            <a href="https://tiktok.com" target="_blank" class="link-card glass-card p-3.5 rounded-2xl hover:border-pink-500/50 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-between group" data-category="social">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-xl bg-pink-600/20 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:bg-pink-600 group-hover:text-white transition">
+                        <i class="fa-brands fa-tiktok text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold text-white group-hover:text-pink-400 transition">TikTok Official Chef Fakhri</h2>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Behind the scene dapur & tips kuliner Jepang</p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-pink-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </div>
+            </a>
+
+            <!-- 5. Instagram Portfolio & Daily Updates -->
+            <a href="https://instagram.com" target="https://www.instagram.com/fakriyy7/" class="link-card glass-card p-3.5 rounded-2xl hover:border-purple-500/50 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-between group" data-category="social">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold text-white group-hover:text-purple-400 transition">Instagram @fakriyy7</h2>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Galeri hidangan & info event terbaru</p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-purple-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </div>
+            </a>
+
+            <!-- 6. Sertifikasi & Pengalaman Kuliner -->
+            <div class="link-card glass-card p-3.5 rounded-2xl hover:border-blue-500/50 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-between group cursor-pointer" 
+                 data-category="cert" onclick="openCertModal()">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-award text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold text-white group-hover:text-blue-400 transition">Sertifikasi & Chef Professional</h2>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Sertifikat Otentikasi Ramen & Hygiene Master</p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-blue-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-award text-xs"></i>
+                </div>
             </div>
 
-            <!-- Item 4: Location Google Maps -->
-            <a href="https://maps.google.com" 
-               target="_blank"
-               data-category="contact" 
-               class="link-card flex items-center justify-between p-4 bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-blue-500/50 rounded-2xl transition duration-200 group glow-card bg-card-custom">
+            <!-- 7. Reservasi / Catering & Partnership -->
+            <a href="https://wa.me/6281234567890?text=Halo%20Chef%20Fakhri,%20saya%20tertarik%20untuk%20kerjasama/catering" 
+               target="_blank" class="link-card glass-card p-3.5 rounded-2xl hover:border-emerald-500/50 transition-all transform hover:-translate-y-1 shadow-lg flex items-center justify-between group" data-category="order">
                 <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-blue-950/80 border border-blue-800/60 flex items-center justify-center text-blue-400 group-hover:scale-110 transition duration-200 shrink-0">
-                        <i class="fa-solid fa-location-dot text-xl"></i>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-handshake text-lg"></i>
                     </div>
                     <div>
-                        <h3 class="font-bold text-sm text-white group-hover:text-blue-400 transition">Lokasi Kedai Fisik</h3>
-                        <p class="text-xs text-gray-400 mt-0.5">Jl. Sakura No. 8, Wonosobo (Petunjuk Maps)</p>
+                        <h2 class="text-sm font-bold text-white group-hover:text-emerald-400 transition">Kerjasama & Event Catering</h2>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Konsultasi menu UMKM & Live Ramen Booth</p>
                     </div>
                 </div>
-                <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-blue-400 transition text-xs ml-2"></i>
+                <div class="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-emerald-600 group-hover:text-white transition">
+                    <i class="fa-solid fa-envelope text-xs"></i>
+                </div>
             </a>
-
-            <!-- Item 5: Recipe & Culinary Vlogs (TikTok / YouTube) -->
-            <a href="https://tiktok.com" 
-               target="_blank"
-               data-category="about" 
-               class="link-card flex items-center justify-between p-4 bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-pink-500/50 rounded-2xl transition duration-200 group glow-card bg-card-custom">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-pink-950/80 border border-pink-800/60 flex items-center justify-center text-pink-400 group-hover:scale-110 transition duration-200 shrink-0">
-                        <i class="fa-brands fa-tiktok text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-sm text-white group-hover:text-pink-400 transition">Konten Koki & Tips Kuliner</h3>
-                        <p class="text-xs text-gray-400 mt-0.5">Behind the scenes pembuatan ramen & resep rahasia</p>
-                    </div>
-                </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-pink-400 group-hover:translate-x-1 transition text-sm ml-2"></i>
-            </a>
-
-            <!-- Item 6: Partnership & Catering Service -->
-            <a href="https://wa.me/6281234567890?text=Halo%20Chef%20Fakhri,%20saya%20tertarik%20kerjasama/catering" 
-               target="_blank"
-               data-category="contact about" 
-               class="link-card flex items-center justify-between p-4 bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-yellow-500/50 rounded-2xl transition duration-200 group glow-card bg-card-custom">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-yellow-950/80 border border-yellow-800/60 flex items-center justify-center text-yellow-400 group-hover:scale-110 transition duration-200 shrink-0">
-                        <i class="fa-solid fa-handshake text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-sm text-white group-hover:text-yellow-400 transition">Kerjasama & Catering Event</h3>
-                        <p class="text-xs text-gray-400 mt-0.5">Undang Live Cooking Chef Fakhri ke acara Anda</p>
-                    </div>
-                </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-yellow-400 group-hover:translate-x-1 transition text-sm ml-2"></i>
-            </a>
-
-            <!-- Item 7: Profile & Certification Modal Trigger -->
-            <div data-category="about" onclick="openCertModal()" 
-                 class="link-card cursor-pointer flex items-center justify-between p-4 bg-gray-900/90 hover:bg-gray-800/90 border border-gray-800 hover:border-emerald-500/50 rounded-2xl transition duration-200 group glow-card bg-card-custom">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition duration-200 shrink-0">
-                        <i class="fa-solid fa-award text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-sm text-white group-hover:text-emerald-400 transition">Sertifikasi & Pengalaman Chef</h3>
-                        <p class="text-xs text-gray-400 mt-0.5">Sertifikat Halal & Authentic Culinary Art</p>
-                    </div>
-                </div>
-                <i class="fa-solid fa-circle-info text-gray-500 group-hover:text-emerald-400 transition text-sm ml-2"></i>
-            </div>
 
         </div>
 
-        <!-- Empty State Search Result -->
-        <div id="no-result" class="hidden text-center py-8 bg-gray-900/40 rounded-2xl border border-gray-800/60">
-            <i class="fa-solid fa-bowl-rice text-3xl text-gray-600 mb-2"></i>
-            <p class="text-gray-400 text-sm">Tidak menemukan hasil yang cocok.</p>
+        <!-- No Search Results State -->
+        <div id="no-result" class="hidden text-center py-8 glass-card rounded-2xl border border-white/5">
+            <i class="fa-solid fa-utensils text-3xl text-gray-500 mb-2"></i>
+            <p class="text-xs text-gray-400">Tidak ada link atau menu yang sesuai pencarian.</p>
         </div>
 
-        <!-- Footer -->
-        <footer class="text-center pt-6 pb-4 border-t border-gray-800/80 text-xs text-gray-500 space-y-2">
-            <p>© 2026 Chef Fakhri • Owner of Oishii Ramen & Bento Japan.</p>
-            <p class="text-[11px] text-gray-600">Built with HTML, Tailwind CSS & JS DOM.</p>
+        <!-- Footer Info -->
+        <footer class="text-center pt-4 pb-2 text-[11px] text-gray-500 space-y-1">
+            <p>© 2026 Oishii Ramen & Bento Japan by Chef Fakhri.</p>
+            <p class="text-[10px] text-gray-600">Built with HTML, Tailwind CSS & JS DOM.</p>
         </footer>
 
     </div>
 
     <!-- Modal Detail Menu -->
-    <div id="menu-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-gray-900 border border-gray-800 w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-4 relative translate-y-4 transition-all duration-300 transform" id="menu-modal-box">
-            <button onclick="closeMenuModal()" class="absolute top-4 right-4 bg-gray-800 text-gray-400 hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img id="modal-img" src="" alt="Menu Image" class="w-full h-44 rounded-2xl object-cover border border-gray-800">
-            <div>
-                <div class="flex justify-between items-start gap-2">
-                    <h3 id="modal-title" class="text-lg font-bold text-white"></h3>
-                    <span id="modal-price" class="px-2.5 py-1 bg-red-950 text-red-400 border border-red-800/60 font-bold text-xs rounded-xl"></span>
-                </div>
-                <p id="modal-desc" class="text-xs text-gray-300 mt-2 leading-relaxed"></p>
+    <div id="menu-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div id="menu-modal-box" class="glass-card max-w-sm w-full rounded-3xl overflow-hidden border border-white/20 shadow-2xl transform translate-y-4 transition-all duration-300">
+            <div class="relative h-48">
+                <img id="modal-img" src="" alt="Menu" class="w-full h-full object-cover">
+                <button onclick="closeMenuModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-red-600 transition">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
             </div>
-            <a id="modal-wa-btn" href="#" target="_blank" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-lg">
-                <i class="fa-brands fa-whatsapp text-base"></i> Pesan Menu Ini via WA
-            </a>
+            <div class="p-5 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 id="modal-title" class="text-base font-bold text-white"></h3>
+                    <span id="modal-price" class="text-sm font-bold text-red-400"></span>
+                </div>
+                <p id="modal-desc" class="text-xs text-gray-300 leading-relaxed"></p>
+                <div class="pt-2">
+                    <a id="modal-wa-btn" href="#" target="_blank" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-lg transition">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        Pesan Menu Ini Langsung
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Modal Sertifikasi / About Chef -->
-    <div id="cert-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-gray-900 border border-gray-800 w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-4 relative translate-y-4 transition-all duration-300 transform" id="cert-modal-box">
-            <button onclick="closeCertModal()" class="absolute top-4 right-4 bg-gray-800 text-gray-400 hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="text-center space-y-2">
-                <div class="w-14 h-14 bg-emerald-950 text-emerald-400 rounded-full flex items-center justify-center mx-auto border border-emerald-800">
-                    <i class="fa-solid fa-award text-2xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white">Profil & Keahlian Chef Fakhri</h3>
-                <p class="text-xs text-gray-400">Pengalaman Kuliner & Komitmen Mutu</p>
+    <!-- Modal Sertifikasi Chef -->
+    <div id="cert-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div id="cert-modal-box" class="glass-card max-w-sm w-full rounded-3xl p-5 border border-white/20 shadow-2xl transform translate-y-4 transition-all duration-300 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-award text-blue-400"></i>
+                    Sertifikasi & Kualifikasi
+                </h3>
+                <button onclick="closeCertModal()" class="w-7 h-7 rounded-full bg-white/10 text-gray-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
             </div>
-            <div class="space-y-2.5 text-xs text-gray-300 border-t border-b border-gray-800 py-3">
-                <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
-                    <span><strong>100% Halal Certified:</strong> Menggunakan bahan-bahan bersertifikat resmi tanpa alkohol/mirin non-halal.</span>
+            <div class="space-y-3 text-xs text-gray-300">
+                <div class="p-2.5 bg-white/5 rounded-xl border border-white/5">
+                    <p class="font-bold text-white">Certified Japanese Noodle Specialist</p>
+                    <p class="text-[11px] text-gray-400">Tokyo Culinary Academy • 2023</p>
                 </div>
-                <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
-                    <span><strong>Authentic Recipe:</strong> Teknik pembuatan broth (kaldu) 8-12 jam untuk cita rasa ramen kaya gurih.</span>
-                </div>
-                <div class="flex items-start gap-2">
-                    <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
-                    <span><strong>UMKM Excellence:</strong> Kualitas kuliner resto bintang lima dengan harga terjangkau.</span>
+                <div class="p-2.5 bg-white/5 rounded-xl border border-white/5">
+                    <p class="font-bold text-white">Food Safety & Hygiene Master</p>
+                    <p class="text-[11px] text-gray-400">Standard International Halal Board • 2024</p>
                 </div>
             </div>
-            <button onclick="closeCertModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2.5 rounded-xl text-xs transition">
-                Tutup Info
+            <button onclick="closeCertModal()" class="w-full py-2 rounded-xl bg-white/10 text-xs font-semibold text-gray-300 hover:bg-white/20 transition">
+                Tutup
             </button>
         </div>
     </div>
 
-    <!-- JavaScript Interaktif -->
+    <!-- JavaScript Interactions -->
     <script>
-        // Copy Link / Toast Function
-        function copyCurrentUrl() {
-            const currentUrl = window.location.href;
-            const dummy = document.createElement('input');
-            document.body.appendChild(dummy);
-            dummy.value = currentUrl;
-            dummy.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummy);
-
-            showToast("Link bio Chef Fakhri disalin!");
-        }
-
-        function showToast(msg) {
+        // Toast Notification Helper
+        function showToast(message) {
             const toast = document.getElementById('toast');
-            document.getElementById('toast-msg').innerText = msg;
+            const toastText = document.getElementById('toast-text');
+            toastText.innerText = message;
             toast.classList.remove('opacity-0', 'pointer-events-none');
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'pointer-events-none');
             }, 2500);
         }
 
-        // Search Filter
-        function filterLinks() {
+        // Copy Current Page Link to Clipboard
+        function copyCurrentLink() {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = window.location.href;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("Tautan Bio Chef Fakhri berhasil disalin!");
+        }
+
+        // Live Search Links Filter
+        function searchLinks() {
             const query = document.getElementById('search-input').value.toLowerCase();
             const cards = document.querySelectorAll('.link-card');
             let visibleCount = 0;
@@ -414,16 +483,16 @@
             }
         }
 
-        // Category Filter
-        function filterCategory(cat) {
+        // Category Filter with Enhanced Styling Toggle
+        function filterCategory(element, cat) {
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => {
-                btn.classList.remove('bg-red-600', 'text-white');
-                btn.classList.add('bg-gray-900', 'text-gray-300', 'border', 'border-gray-800');
+                btn.classList.remove('cat-btn-active');
+                btn.classList.add('cat-btn-inactive');
             });
 
-            event.currentTarget.classList.remove('bg-gray-900', 'text-gray-300', 'border', 'border-gray-800');
-            event.currentTarget.classList.add('bg-red-600', 'text-white');
+            element.classList.remove('cat-btn-inactive');
+            element.classList.add('cat-btn-active');
 
             const cards = document.querySelectorAll('.link-card');
             let visibleCount = 0;
@@ -453,8 +522,8 @@
             document.getElementById('modal-desc').innerText = desc;
             document.getElementById('modal-img').src = imgUrl;
 
-            const waText = encodeURIComponent(`Halo Chef Fakhri, saya berminat memesan ${title} (${price}). Bagaimanakah cara pengirimannya?`);
-            document.getElementById('modal-wa-btn').href = `https://wa.me/6281234567890?text=${waText}`;
+            const waMsg = encodeURIComponent(`Halo Chef Fakhri, saya mau pesan menu ${title} (${price})`);
+            document.getElementById('modal-wa-btn').href = `https://wa.me/6281234567890?text=${waMsg}`;
 
             const modal = document.getElementById('menu-modal');
             const box = document.getElementById('menu-modal-box');
@@ -482,47 +551,6 @@
             const box = document.getElementById('cert-modal-box');
             modal.classList.add('opacity-0', 'pointer-events-none');
             box.classList.add('translate-y-4');
-        }
-
-        // Theme Switcher
-        function setTheme(theme) {
-            document.body.classList.remove('theme-warm', 'theme-cyber', 'bg-white', 'text-gray-900');
-            if (theme === 'light') {
-                document.body.classList.add('bg-white', 'text-gray-900');
-            } else if (theme === 'warm') {
-                document.body.classList.add('theme-warm');
-            } else if (theme === 'cyber') {
-                document.body.classList.add('theme-cyber');
-            }
-            showToast(`Tema diubah ke mode ${theme}!`);
-        }
-
-        // Language Switcher Simulation
-        function setLanguage(lang) {
-            const btnId = document.getElementById('lang-id');
-            const btnEn = document.getElementById('lang-en');
-            const subTitle = document.getElementById('sub-title');
-            const bioDesc = document.getElementById('bio-desc');
-
-            if (lang === 'en') {
-                btnEn.classList.add('bg-red-600', 'text-white');
-                btnEn.classList.remove('text-gray-400');
-                btnId.classList.remove('bg-red-600', 'text-white');
-                btnId.classList.add('text-gray-400');
-
-                subTitle.innerText = "Owner & Executive Head Chef";
-                bioDesc.innerText = '"Bringing authentic Japanese ramen flavor harmony with high-class standards and premium quality ingredients."';
-                showToast("Language changed to English");
-            } else {
-                btnId.classList.add('bg-red-600', 'text-white');
-                btnId.classList.remove('text-gray-400');
-                btnEn.classList.remove('bg-red-600', 'text-white');
-                btnEn.classList.add('text-gray-400');
-
-                subTitle.innerText = "Owner & Executive Head Chef";
-                bioDesc.innerText = '"Menghadirkan keharmonisan rasa ramen otentik Jepang dengan standar kelas atas & bahan berkualitas tinggi."';
-                showToast("Bahasa diubah ke Indonesia");
-            }
         }
     </script>
 </body>
